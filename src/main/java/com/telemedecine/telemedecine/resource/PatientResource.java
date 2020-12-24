@@ -1,6 +1,7 @@
 package com.telemedecine.telemedecine.resource;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.telemedecine.telemedecine.dto.MedecinDto;
 import com.telemedecine.telemedecine.dto.PatientDto;
 import com.telemedecine.telemedecine.dto.views.UserView;
 import com.telemedecine.telemedecine.exception.AppException;
@@ -24,11 +25,14 @@ public class PatientResource {
 
     @PostMapping
     @JsonView(UserView.Basic.class)
-    public void add(@RequestBody PatientDto PatientDto) throws AppException {
-        LOGGER.debug("START RESOURCE add doctor by name : {}", PatientDto.getNom());
-        PatientService.save(PatientDto);
-        LOGGER.debug("END RESOURCE add doctor by id : {}, name: {} is ok", PatientDto.getId(), PatientDto.getNom());
+    public Long addPatient(@RequestBody PatientDto patientDto) throws AppException {
+        // String username = AuthenticationHelper.getCurrentUsername();
+        LOGGER.debug("START RESOURCE ADD PAtient BY USER: {}");
+        Long patientId = PatientService.add(patientDto);
+        LOGGER.debug("END RESOURCE ADD PAtient BY USER: {}, REACTED ID: {}", patientId);
+        return patientId;
     }
+
 
     @PutMapping
     @JsonView(UserView.Basic.class)
@@ -49,7 +53,7 @@ public class PatientResource {
 
     @GetMapping
     @JsonView(UserView.Basic.class)
-    public List<PatientDto> getAllByDesignation() throws AppException {
+    public List<PatientDto> getAll() throws AppException {
         LOGGER.debug("START RESOURCE all find doctors");
         List<PatientDto> PatientDtos = PatientService.findAll();
         LOGGER.debug("END RESOURCE find all doctors, size: {}", PatientDtos.size());

@@ -26,6 +26,12 @@ public class Utilisateur {
 
     @NotNull
     private String prenom;
+    @NotNull
+    private String sexe;
+    @ManyToOne
+    @NotNull
+    private Ville ville;
+
 
     private Date dateNaissance;
 

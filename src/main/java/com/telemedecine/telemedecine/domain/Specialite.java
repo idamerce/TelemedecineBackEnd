@@ -12,8 +12,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Specialite {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_UTILISATEUR_SEQ")
-    @SequenceGenerator(name = "ID_UTILISATEUR_SEQ", sequenceName = "ID_UTILISATEUR_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SPECIALITY_SEQ")
+    @SequenceGenerator(name = "ID_SPECIALITY_SEQ", sequenceName = "ID_USPECIALITY_SEQ")
     private Long id;
 
     @NotNull

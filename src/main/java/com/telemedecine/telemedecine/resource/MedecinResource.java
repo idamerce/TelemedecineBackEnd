@@ -2,9 +2,11 @@ package com.telemedecine.telemedecine.resource;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.telemedecine.telemedecine.dto.MedecinDto;
+import com.telemedecine.telemedecine.dto.PatientDto;
 import com.telemedecine.telemedecine.dto.views.UserView;
 import com.telemedecine.telemedecine.exception.AppException;
 import com.telemedecine.telemedecine.service.MedecinService;
+import com.telemedecine.telemedecine.service.PatientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +18,7 @@ import java.util.List;
 public class MedecinResource {
     private static final Logger LOGGER = LoggerFactory.getLogger(MedecinResource.class);
 
-    private final com.telemedecine.telemedecine.service.MedecinService MedecinService;
+    private final MedecinService MedecinService;
 
     public MedecinResource(MedecinService MedecinService) {
         this.MedecinService = MedecinService;
@@ -24,12 +26,13 @@ public class MedecinResource {
 
     @PostMapping
     @JsonView(UserView.Basic.class)
-    public void add(@RequestBody MedecinDto MedecinDto) throws AppException {
-        LOGGER.debug("START RESOURCE add doctor by name : {}", MedecinDto.getNom());
-        MedecinService.save(MedecinDto);
-        LOGGER.debug("END RESOURCE add doctor by id : {}, name: {} is ok", MedecinDto.getId(), MedecinDto.getNom());
+    public Long addMedecin(@RequestBody MedecinDto medecinDto) throws AppException {
+       // String username = AuthenticationHelper.getCurrentUsername();
+        LOGGER.debug("START RESOURCE ADD DOCTOR BY USER: {}");
+        Long medecinId = MedecinService.add(medecinDto);
+        LOGGER.debug("END RESOURCE ADD DOCTOR BY USER: {}, REACTED ID: {}", medecinId);
+        return medecinId;
     }
-
     @PutMapping
     @JsonView(UserView.Basic.class)
     public void update(@RequestBody MedecinDto MedecinDto) throws AppException {

@@ -31,7 +31,9 @@ public class Medecin {
     @Column(unique = true)
     private String cin;
 
-
+    @ManyToOne
+    @NotNull
+    private Ville ville;
     private String adresse;
     @Transient
     private Boolean isActivated;

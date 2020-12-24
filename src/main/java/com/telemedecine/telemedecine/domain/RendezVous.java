@@ -1,14 +1,19 @@
 package com.telemedecine.telemedecine.domain;
 
+import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 import java.time.Instant;
+import java.util.Date;
 
+@Entity
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RendezVous {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_RENDEZVOUS_SEQ")
@@ -24,7 +29,7 @@ public class RendezVous {
 
     private String location;
 
-    private Instant rendezvousDateTime;
+    private Date rendezvousDateTime;
 
     @CreatedBy
     private Long createdBy;

@@ -51,7 +51,7 @@ public class PatientService {
         LOGGER.debug("START SERVICE find by id {}", id);
         return Optional.ofNullable(PatientRepository.findById(id))
                 .map(o -> PatientMapper.toDto(o.get()))
-                .orElseThrow(() -> new AppException(ExceptionCode.API_RESOURCE_NOT_FOUND, "doctor not found"));
+                .orElseThrow(() -> new AppException(ExceptionCode.API_RESOURCE_NOT_FOUND, "patient not found"));
     }
 
     public List<PatientDto> findAll() throws AppException {

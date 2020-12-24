@@ -16,6 +16,9 @@ public class Hopital {
 
     @NotNull
     private String nom;
+    @NotNull
+    private String ville;
+
     @OneToMany
     private List<Medecin> medecins= new ArrayList<>();
 }

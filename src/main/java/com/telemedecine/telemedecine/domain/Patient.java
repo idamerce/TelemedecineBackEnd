@@ -14,8 +14,8 @@ import java.util.Date;
 @AllArgsConstructor
 public class Patient {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_OUVRIER_SEQ")
-    @SequenceGenerator(name = "ID_OUVRIER_SEQ", sequenceName = "ID_OUVRIER_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_PATIENT_SEQ")
+    @SequenceGenerator(name = "ID_PATIENT_SEQ", sequenceName = "ID_PATIENT_SEQ")
     private Long id;
 
     @NotNull
@@ -29,6 +29,9 @@ public class Patient {
     @NotNull
     @Column(unique = true)
     private String cin;
+    @ManyToOne
+    @NotNull
+    private Ville ville;
 
 
     private String adresse;
