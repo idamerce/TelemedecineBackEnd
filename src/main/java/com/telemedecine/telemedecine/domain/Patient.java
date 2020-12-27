@@ -1,6 +1,7 @@
 package com.telemedecine.telemedecine.domain;
 
-import com.sun.istack.internal.NotNull;
+
+import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;

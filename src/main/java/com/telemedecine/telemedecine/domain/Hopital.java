@@ -1,6 +1,6 @@
 package com.telemedecine.telemedecine.domain;
 
-import com.sun.istack.internal.NotNull;
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,10 +15,11 @@ public class Hopital {
 
 
     @NotNull
-    private String nom;
+    private String name;
     @NotNull
     private String ville;
 
-    @OneToMany
-    private List<Medecin> medecins= new ArrayList<>();
+
+    @OneToMany(targetEntity=Medecin.class, mappedBy="hopital",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Medecin> medecins = new ArrayList<>();
 }

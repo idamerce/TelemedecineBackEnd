@@ -5,7 +5,7 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
 
 import javax.persistence.*;
-import java.time.Instant;
+
 import java.util.Date;
 
 @Entity
