@@ -1,6 +1,7 @@
 package com.telemedecine.telemedecine.domain;
 
-import com.sun.istack.internal.NotNull;
+
+import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,11 +32,16 @@ public class Medecin {
     @Column(unique = true)
     private String cin;
 
-    @ManyToOne
     @NotNull
-    private Ville ville;
+    private String ville;
     private String adresse;
+
+
+
     @Transient
     private Boolean isActivated;
 
+    @ManyToOne()
+    @JoinColumn(name="hopital_id", referencedColumnName = "hopital_id", insertable = false, updatable = false)
+    private Hopital hopital;
 }

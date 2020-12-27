@@ -62,7 +62,7 @@ public class MedecinResource {
     @JsonView(UserView.Basic.class)
     public List<MedecinDto> getAllByHospitalName(@PathVariable String nom) throws AppException {
         LOGGER.debug("START RESOURCE all find doctors");
-        List<MedecinDto> MedecinDtos = MedecinService.findByHospitalName(nom);
+       List<MedecinDto> MedecinDtos = MedecinService.findByHospitalName(nom);
         LOGGER.debug("END RESOURCE find all doctors, size: {}", MedecinDtos.size());
         return MedecinDtos;
     }

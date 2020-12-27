@@ -49,7 +49,7 @@ public class MedecinService {
 
     public MedecinDto findById(Long id) throws Exception {
         LOGGER.debug("START SERVICE find by id {}", id);
-        return Optional.ofNullable(medecinRepository.findById(id))
+        return Optional.of(medecinRepository.findById(id))
                 .map(o -> MedecinMapper.toDto(o.get()))
                 .orElseThrow(() -> new AppException(ExceptionCode.API_RESOURCE_NOT_FOUND, "doctor not found"));
     }

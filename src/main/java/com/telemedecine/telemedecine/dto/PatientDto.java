@@ -23,4 +23,6 @@ public class PatientDto {
     private String cin;
     @JsonView(UserView.Basic.class)
     private String adresse;
+
+
 }

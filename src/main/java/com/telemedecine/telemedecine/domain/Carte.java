@@ -1,6 +1,6 @@
 package com.telemedecine.telemedecine.domain;
 
-import com.sun.istack.internal.NotNull;
+
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,11 +18,11 @@ public class Carte {
     @SequenceGenerator(name = "ID_CARTE_SEQ", sequenceName = "ID_CARTE_SEQ")
     private Long id;
 
-    @NotNull
+    @NonNull
     private Date dateOfCreation;
 
 
 
-    @OneToMany(mappedBy = "carte", cascade = CascadeType.ALL)
-    private List<Consultation> consultations;
+   // @OneToMany(mappedBy = "carte", cascade = CascadeType.ALL)
+  //  private List<Consultation> consultations;
 }
