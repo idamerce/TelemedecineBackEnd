@@ -1,4 +1,4 @@
-package com.telemedecine.telemedecine.resource;
+package com.telemedecine.telemedecine.Controller;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -6,13 +6,14 @@ import java.util.stream.Collectors;
 import com.telemedecine.telemedecine.domain.Role;
 import com.telemedecine.telemedecine.domain.RoleName;
 import com.telemedecine.telemedecine.domain.Utilisateur;
+import com.telemedecine.telemedecine.dto.reponse.JwtResponse;
+import com.telemedecine.telemedecine.dto.reponse.MessageResponse;
 import com.telemedecine.telemedecine.jwt.JwtUtils;
-import com.telemedecine.telemedecine.reponse.JwtResponse;
-import com.telemedecine.telemedecine.reponse.MessageResponse;
+import com.telemedecine.telemedecine.dto.request.LoginRequest;
+import com.telemedecine.telemedecine.dto.request.SignupRequest;
 import com.telemedecine.telemedecine.repository.RoleRepository;
 import com.telemedecine.telemedecine.repository.UtilisateurRepository;
-import com.telemedecine.telemedecine.request.LoginRequest;
-import com.telemedecine.telemedecine.request.SignupRequest;
+
 import com.telemedecine.telemedecine.service.UserDetailsImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,7 +61,7 @@ public class AuthController {
 		String jwt = jwtUtils.generateJwtToken(authentication);
 
 		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-		Utilisateur user = userRepository.findByLogin(loginRequest.getLogin()).get();
+		Utilisateur user = userRepository.findByUsername(loginRequest.getLogin()).get();
 		log.info("user object: {}",user);
 
 		List<String> roles = userDetails.getAuthorities().stream()
@@ -69,7 +70,7 @@ public class AuthController {
 
 		log.info("roles : {}",roles);
 
-		List<Role> roles1 = userRepository.findByLogin(loginRequest.getLogin()).get().getRoles();
+		List<Role> roles1 = userRepository.findByUsername(loginRequest.getLogin()).get().getRoles();
 
 		JwtResponse response = new JwtResponse(jwt,userDetails.getId(),
 				userDetails.getUsername(),
@@ -100,7 +101,7 @@ public class AuthController {
 			_user .setAdresse(signUpRequest.getAdresse());
 			_user .setDateNaissance(signUpRequest.getDateNaissence());
 			_user .setPassword(signUpRequest.getPassword());
-			_user .setVille(signUpRequest.getVille());
+			//_user .setVille(signUpRequest.getVille());
 			_user .setPassword(encoder.encode(signUpRequest.getPassword()));
 
 			return new ResponseEntity<>(userRepository.save(_user ), HttpStatus.OK);
@@ -114,7 +115,7 @@ public class AuthController {
 
 		log.info("Registering user with infos : {}",signUpRequest);
 
-		if (userRepository.existsByLogin(signUpRequest.getLogin())) {
+		if (userRepository.existsByUsername(signUpRequest.getLogin())) {
 			return ResponseEntity
 					.badRequest()
 					.body(new MessageResponse("Error: login is already taken!"));

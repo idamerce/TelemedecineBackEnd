@@ -1,47 +1,62 @@
 package com.telemedecine.telemedecine.domain;
 
-
-import com.sun.istack.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sun.istack.internal.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @Builder
+@Table(name = "medecin")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Medecin {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Medecin  implements Serializable {
+
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_MEDECIN_SEQ")
-    @SequenceGenerator(name = "ID_MEDECIN_SEQ", sequenceName = "ID_MEDECIN_SEQ")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    private String nom;
-
-    @NotNull
-    private String prenom;
-
+    @Column(name = "full_name")
+    private String fullName;
+    @Column(name = "phone_number")
+    private String phone;
+    @Column(name = "address")
+    @Size(max = 100)
+    private String address;
     private Date dateNaissance;
 
-    @NotNull
-    @Column(unique = true)
-    private String cin;
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "medecin")
+    @JsonIgnore
+    private List<RendezVous> appointements = new ArrayList<>();
 
-    @NotNull
-    private String ville;
-    private String adresse;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id", nullable=false)
+    @JsonIgnore
+    private Utilisateur user;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="specialite_id", nullable=false)
+    @JsonIgnore
+    private Specialite specialite;
 
+    public Medecin(String fullName, String phone, @Size(max = 100) String address, Utilisateur user) {
+        this.fullName = fullName;
+        this.phone = phone;
+        this.address = address;
+        this.user = user;
+    }
 
-    @Transient
-    private Boolean isActivated;
-
-    @ManyToOne()
-    @JoinColumn(name="hopital_id", referencedColumnName = "hopital_id", insertable = false, updatable = false)
-    private Hopital hopital;
 }

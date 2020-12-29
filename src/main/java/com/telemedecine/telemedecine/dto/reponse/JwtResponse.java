@@ -1,6 +1,7 @@
-package com.telemedecine.telemedecine.reponse;
+package com.telemedecine.telemedecine.dto.reponse;
 
 import com.telemedecine.telemedecine.domain.Role;
+import com.telemedecine.telemedecine.domain.Ville;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +17,7 @@ public class JwtResponse {
 	private String login;
 	private String nom;
 	private String prenom;
-	private String ville;
+	private Ville ville;
 	private String adresse;
 	private String sexe;
 	private String cin;
@@ -24,16 +25,16 @@ public class JwtResponse {
 	private List<Role> roles;
 
 	public JwtResponse(String accessToken,
-					   Long id,
-					   String login,
-					   String nom,
-					   String prenom,
-					   String ville,
-					   String adresse,
-					   String sexe,
-					   String cin,
-					   Date dateNaissance,
-					   List<Role> roles) {
+                       Long id,
+                       String login,
+                       String nom,
+                       String prenom,
+                       Ville ville,
+                       String adresse,
+                       String sexe,
+                       String cin,
+                       Date dateNaissance,
+                       List<Role> roles) {
 		this.token = accessToken;
 		this.id = id;
 		this.login = login;

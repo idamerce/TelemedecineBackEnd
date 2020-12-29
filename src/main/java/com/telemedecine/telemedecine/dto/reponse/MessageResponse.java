@@ -1,4 +1,4 @@
-package com.telemedecine.telemedecine.reponse;
+package com.telemedecine.telemedecine.dto.reponse;
 
 public class MessageResponse {
 	private String message;

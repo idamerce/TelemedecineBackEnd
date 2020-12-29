@@ -5,8 +5,6 @@ package com.telemedecine.telemedecine.service;
 import com.telemedecine.telemedecine.dto.PatientDto;
 import com.telemedecine.telemedecine.exception.AppException;
 import com.telemedecine.telemedecine.exception.ExceptionCode;
-import com.telemedecine.telemedecine.mapper.PatientMapper;
-import com.telemedecine.telemedecine.repository.PatientRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +19,7 @@ import java.util.Optional;
 @Transactional
 @Slf4j
 public class PatientService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(PatientService.class);
+   /* private static final Logger LOGGER = LoggerFactory.getLogger(PatientService.class);
 
     @Autowired
     private com.telemedecine.telemedecine.repository.PatientRepository PatientRepository;
@@ -60,5 +58,5 @@ public class PatientService {
                 .map(PatientMapper::toDtos)
                 .orElseThrow(() -> new AppException(ExceptionCode.API_RESOURCE_NOT_FOUND, "patients not found"));
     }
-
+*/
 }

@@ -1,14 +1,21 @@
-package com.telemedecine.telemedecine.resource;
+package com.telemedecine.telemedecine.Controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.telemedecine.telemedecine.dto.RendezVousDto;
+import com.telemedecine.telemedecine.dto.request.NewAppointmentRequestDto;
 import com.telemedecine.telemedecine.dto.views.UserView;
 import com.telemedecine.telemedecine.exception.AppException;
 import com.telemedecine.telemedecine.service.RendezVousService;
+import lombok.var;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.ValidationException;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +25,8 @@ public class RendezVousResource {
     private static final Logger LOGGER = LoggerFactory.getLogger(RendezVousResource.class);
 
     private final RendezVousService rendezVousService;
+    @Autowired
+    private com.telemedecine.telemedecine.service.publicService publicService;
 
 
     public RendezVousResource(RendezVousService rendezVousService) {
@@ -31,6 +40,17 @@ public class RendezVousResource {
         Long rvId = rendezVousService.add(RendezVousDto);
         LOGGER.debug("END RESOURCE ADD DOCTOR BY USER: {}, REACTED ID: {}", rvId);
         return rvId;
+    }
+    //  Add new appointement;
+    @PostMapping("appointment/save")
+    public ResponseEntity<?> save(@Valid @RequestBody NewAppointmentRequestDto newAppointment, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            throw new ValidationException("Appointment has errors; Can not save the appointment;");
+        }
+
+        var saveAppointement = this.publicService.save(newAppointment);
+        return ResponseEntity.ok(saveAppointement);
+
     }
     @PutMapping
     @JsonView(UserView.Basic.class)

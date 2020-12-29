@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Builder
+@Table(name = "specialite")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Specialite {

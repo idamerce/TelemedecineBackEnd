@@ -1,12 +1,10 @@
-package com.telemedecine.telemedecine.resource;
+package com.telemedecine.telemedecine.Controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.telemedecine.telemedecine.dto.MedecinDto;
-import com.telemedecine.telemedecine.dto.PatientDto;
 import com.telemedecine.telemedecine.dto.views.UserView;
 import com.telemedecine.telemedecine.exception.AppException;
 import com.telemedecine.telemedecine.service.MedecinService;
-import com.telemedecine.telemedecine.service.PatientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;

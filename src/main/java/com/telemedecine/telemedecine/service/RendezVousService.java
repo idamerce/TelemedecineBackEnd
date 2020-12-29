@@ -1,20 +1,29 @@
 package com.telemedecine.telemedecine.service;
 
-import com.telemedecine.telemedecine.dto.MedecinDto;
+import com.telemedecine.telemedecine.dto.reponse.ApiResponse;
+import com.telemedecine.telemedecine.domain.Patient;
+import com.telemedecine.telemedecine.domain.RendezVous;
+import com.telemedecine.telemedecine.dto.request.NewAppointmentRequestDto;
 import com.telemedecine.telemedecine.dto.RendezVousDto;
 import com.telemedecine.telemedecine.exception.AppException;
 import com.telemedecine.telemedecine.exception.ExceptionCode;
-import com.telemedecine.telemedecine.mapper.MedecinMapper;
 import com.telemedecine.telemedecine.mapper.RendezVousMapper;
 import com.telemedecine.telemedecine.repository.MedecinRepository;
+import com.telemedecine.telemedecine.repository.PatientRepository;
 import com.telemedecine.telemedecine.repository.RendezVousRepository;
+import com.telemedecine.telemedecine.repository.ShiftHoraireRepository;
 import lombok.extern.slf4j.Slf4j;
+import lombok.var;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -25,9 +34,14 @@ import java.util.Optional;
 public class RendezVousService {
     private static final Logger LOGGER = LoggerFactory.getLogger(RendezVousService.class);
     @Autowired
+    private ShiftHoraireRepository shiftHoraireRepository;
+    @Autowired
+    private PatientRepository patientRepository;
+    @Autowired
     private MedecinRepository medecinRepository;
     @Autowired
     private RendezVousRepository rendezVousRepository;
+
     public Long add(RendezVousDto rendezVousDto){
 
         log.info("SATRT SERVICE CREATE NEW rendez vous");
@@ -66,5 +80,7 @@ public class RendezVousService {
         // TODO add condition > current day, active appointment
         return rendezVousRepository.count();
     }
+
+
 
 }

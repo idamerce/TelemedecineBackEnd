@@ -23,8 +23,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
-		// securedEnabled = true,
-		// jsr250Enabled = true,
+		 securedEnabled = true,
+		 jsr250Enabled = true,
 		prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
@@ -59,8 +59,30 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors().and().csrf().disable()
 			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-			.authorizeRequests().antMatchers("/api/auth/**").permitAll()
+				.authorizeRequests()
+				.antMatchers("/"
+						, "/favicon.ico"
+						, "/**/*.png"
+						, "/**/*.gif"
+						, "/**/*.svg"
+						, "/**/*.jpg"
+						, "/**/*.ttf"
+						, "/**/*.woff"
+						, "/**/*.woff2"
+						, "/**/*.html"
+						, "/**/*.css"
+						, "/**/*.js")
+				.permitAll()
+			.antMatchers("/api/auth/**").permitAll()
 			.antMatchers("/api/**").permitAll()
+				.antMatchers("/api/public/**")
+				.permitAll()
+				.antMatchers("/api/public/appointment/save")
+				.permitAll()
+				.antMatchers("/api/public/medecin")
+				.permitAll()
+				.antMatchers("/api/public/availability")
+				.permitAll()
 			.anyRequest().authenticated();
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

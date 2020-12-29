@@ -1,22 +1,19 @@
-package com.telemedecine.telemedecine.dto;
+package com.telemedecine.telemedecine.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.telemedecine.telemedecine.dto.views.UserView;
 import lombok.*;
-
-import java.time.LocalDate;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
-public class RendezVousDto {
-    @JsonView(UserView.Basic.class)
-    private Long id;
+public class MedecinAvailabilityRequestDto {
 
     @JsonView(UserView.Basic.class)
-    private LocalDate date;
+    private Long medecinId;
     @JsonView(UserView.Basic.class)
-    private String location;
+    private String date;
+
 }

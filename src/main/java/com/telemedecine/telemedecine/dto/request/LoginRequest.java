@@ -1,4 +1,4 @@
-package com.telemedecine.telemedecine.request;
+package com.telemedecine.telemedecine.dto.request;
 
 import com.sun.istack.NotNull;
 

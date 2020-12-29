@@ -1,26 +1,29 @@
-package com.telemedecine.telemedecine.dto;
+package com.telemedecine.telemedecine.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.telemedecine.telemedecine.dto.views.UserView;
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
-public class MedecinDto {
+public class TodayAppointmentListDto {
     @JsonView(UserView.Basic.class)
-    private Long id;
+    private Long appointmentId;
     @JsonView(UserView.Basic.class)
-    private String nom;
+    private String patientName;
     @JsonView(UserView.Basic.class)
-    private String phone;
+    private String patientEmail;
     @JsonView(UserView.Basic.class)
-    private Date dateNaissance;
+    private Long shift_horaire_id;
     @JsonView(UserView.Basic.class)
-    private String cin;
+    private LocalTime timeStart;
     @JsonView(UserView.Basic.class)
-    private String adresse;
+    private LocalTime timeEnd;
+    @JsonView(UserView.Basic.class)
+    private boolean status;
 }

@@ -1,26 +1,28 @@
-package com.telemedecine.telemedecine.dto;
+package com.telemedecine.telemedecine.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.telemedecine.telemedecine.dto.views.UserView;
 import lombok.*;
 
-import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
-public class MedecinDto {
+public class NewAppointmentRequestDto {
+
     @JsonView(UserView.Basic.class)
-    private Long id;
+    private String name;
     @JsonView(UserView.Basic.class)
-    private String nom;
+    private String phoneNumber;
     @JsonView(UserView.Basic.class)
-    private String phone;
+    private String date;
     @JsonView(UserView.Basic.class)
-    private Date dateNaissance;
+    private Long shiftTimeId;
     @JsonView(UserView.Basic.class)
-    private String cin;
+    private Long medecinId;
     @JsonView(UserView.Basic.class)
-    private String adresse;
+    private Long specialiteId;
+    @JsonView(UserView.Basic.class)
+    private boolean isValide = false;
 }

@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.telemedecine.telemedecine.domain.Utilisateur;
+import com.telemedecine.telemedecine.domain.Ville;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,7 +23,7 @@ public class UserDetailsImpl implements UserDetails {
 	private String nom;
 	private String prenom;
 	private String sexe;
-	private String ville;
+	private Ville ville;
 	private String adresse;
 	private String cin;
 	private Date dateNaissance;
@@ -37,7 +38,7 @@ public class UserDetailsImpl implements UserDetails {
 						   String nom,
 						   String prenom,
 						   String sexe,
-						   String ville,
+						   Ville ville,
 						   String adresse,
 						   String cin,
 						   String password,
@@ -110,11 +111,11 @@ public class UserDetailsImpl implements UserDetails {
 		this.sexe = sexe;
 	}
 
-	public String getVille() {
+	public Ville getVille() {
 		return ville;
 	}
 
-	public void setVille(String ville) {
+	public void setVille(Ville ville) {
 		this.ville = ville;
 	}
 

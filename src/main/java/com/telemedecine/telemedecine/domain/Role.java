@@ -1,28 +1,36 @@
 package com.telemedecine.telemedecine.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
-
 @Entity
+@Getter
+@Setter
+@Builder
 @Table(name = "roles")
+@NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
+
     @Enumerated(EnumType.STRING)
-    @Column(length = 20)
+    @NaturalId
+    @Column(length = 60)
     private RoleName name;
-    public Role(){}
-    public Role(RoleName name){this.name = name;}
-    public Integer getId() {
+
+
+    public Role(RoleName name) {
+        this.name = name;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

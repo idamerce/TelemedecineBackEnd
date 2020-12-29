@@ -11,10 +11,10 @@ public class MedecinMapper {
     public static MedecinDto toDto(Medecin medecin) {
         return MedecinDto.builder()
                 .id(medecin.getId())
-                .nom(medecin.getNom())
-                .prenom(medecin.getPrenom())
-                .cin(medecin.getCin())
-                .adresse(medecin.getAdresse())
+                .nom(medecin.getFullName())
+                .phone(medecin.getPhone())
+
+                .adresse(medecin.getAddress())
                 .dateNaissance(medecin.getDateNaissance())
                 .build()
                 ;
@@ -28,10 +28,9 @@ public class MedecinMapper {
     public static Medecin toEntity(MedecinDto medecinDto) {
         return  Medecin.builder()
                 .id(medecinDto.getId())
-                .nom(medecinDto.getNom())
-                .prenom(medecinDto.getPrenom())
-                .cin(medecinDto.getCin())
-                .adresse(medecinDto.getAdresse())
+                .fullName(medecinDto.getNom())
+                .phone(medecinDto.getPhone())
+                .address(medecinDto.getAdresse())
                 .dateNaissance(medecinDto.getDateNaissance())
                 .build()
                 ;
